@@ -10,10 +10,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>me.projects.ml</groupId>
+    <groupId>com.me.projects</groupId>
     <artifactId>evolution</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>POC for call, mail and message fraud detection</description>
+    <description>Zero player game</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -22,8 +22,9 @@
         <httpclient.version>4.5.14</httpclient.version>
         <azure.openapi.version>1.0.0-beta.4</azure.openapi.version>
         <jackson.version>2.15.1</jackson.version>
-        <lombok.version>1.18.24</lombok.version>
-        <opencsv.version>4.1</opencsv.version>
+        <lombok.version>1.18.26</lombok.version>
+        <opencsv.version>5.7.1</opencsv.version>
+        <kotlin.version>1.7.10</kotlin.version>
     </properties>
 
     <dependencies>
@@ -85,12 +86,41 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version> <!-- Replace with your desired Kotlin version -->
+        </dependency>
+
+        <!-- Kotlin Reflect (Optional) - Needed for some Kotlin features -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version> <!-- Replace with your desired Kotlin version -->
+        </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>17</jvmTarget>
+                </configuration>
             </plugin>
         </plugins>
     </build>
