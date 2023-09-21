@@ -1,4 +1,4 @@
-package me.projects.ml.character.movement
+package com.me.projects.character.movement
 
 enum class Directions(i: Int) {
     TOP_LEFT(0),

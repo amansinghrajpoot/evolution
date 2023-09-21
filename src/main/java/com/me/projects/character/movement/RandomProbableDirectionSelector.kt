@@ -1,4 +1,4 @@
-package me.projects.ml.character.movement
+package com.me.projects.character.movement
 
 import kotlin.random.Random
 
