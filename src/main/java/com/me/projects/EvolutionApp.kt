@@ -1,15 +1,11 @@
 package com.me.projects
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan
-import org.springframework.boot.runApplication
-import kotlin.Suppress
-
-@SpringBootApplication
-@ConfigurationPropertiesScan
-open class Application
+import com.me.projects.game.gui.GUI
 
 fun main(args: Array<String>) {
-    @Suppress("SpreadOperator")
-    runApplication<Application>(*args)
+    val pointsList = ArrayList<Pair<Int, Int>>()
+    pointsList.add(Pair<Int, Int>(300, 300))
+    pointsList.add(Pair<Int, Int>(500, 500))
+    pointsList.add(Pair<Int, Int>(600, 400))
+    GUI().draw(pointsList)
 }
