@@ -1,9 +1,9 @@
 package com.me.projects.character.movement
 
-import com.me.projects.game.gui.GUI.CELL_START_WIDTH_BOUNDARY
-import com.me.projects.game.gui.GUI.CELL_END_WIDTH_BOUNDARY
 import com.me.projects.game.gui.GUI.CELL_END_HEIGHT_BOUNDARY
+import com.me.projects.game.gui.GUI.CELL_END_WIDTH_BOUNDARY
 import com.me.projects.game.gui.GUI.CELL_START_HEIGHT_BOUNDARY
+import com.me.projects.game.gui.GUI.CELL_START_WIDTH_BOUNDARY
 
 fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
     val newX = coordinate[0]
@@ -79,6 +79,6 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
 }
 
 fun isValidCoordinate(x: Int, y: Int): Boolean {
-    return x in CELL_START_WIDTH_BOUNDARY..CELL_END_WIDTH_BOUNDARY
-            && y in CELL_START_HEIGHT_BOUNDARY..CELL_END_HEIGHT_BOUNDARY
+    return x in CELL_START_WIDTH_BOUNDARY..CELL_END_WIDTH_BOUNDARY &&
+        y in CELL_START_HEIGHT_BOUNDARY..CELL_END_HEIGHT_BOUNDARY
 }
