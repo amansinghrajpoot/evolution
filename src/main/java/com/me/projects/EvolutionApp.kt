@@ -1,33 +1,25 @@
 package com.me.projects
 
 import com.me.projects.character.Cell
-import com.me.projects.game.gui.GUI
-import com.me.projects.game.logic.killCellsOnLeftSide
+import com.me.projects.game.logic.makeCellsMove
+import com.me.projects.game.logic.mutateGenes
+import com.me.projects.game.logic.paintCellsOnGUI
 
 fun main() {
-    val gui = GUI()
-    val pointsList = ArrayList<IntArray>()
+    val cell = Cell(intArrayOf(300, 200), doubleArrayOf(0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0))
 
-    val cell1 = Cell(intArrayOf(995, 400), doubleArrayOf())
-    val cell2 = Cell(intArrayOf(300, 200), doubleArrayOf())
+    val cells = arrayListOf(cell)
 
-    val cells = arrayListOf(cell1, cell2)
+    paintCellsOnGUI(cells)
 
-    for (cell in cells) {
-        pointsList.add(cell.coordinates)
-    }
-
-    gui.draw(pointsList)
     Thread.sleep(2000)
 
-    killCellsOnLeftSide(cells)
-
-    pointsList.clear()
-
-    for (cell in cells) {
-        pointsList.add(cell.coordinates)
+    for (i in 1..700) {
+        makeCellsMove(cells)
+        Thread.sleep(50)
+        paintCellsOnGUI(cells)
+        if (i % 100 == 0) {
+            mutateGenes(cells)
+        }
     }
-
-    gui.draw(pointsList)
-    Thread.sleep(2000)
 }

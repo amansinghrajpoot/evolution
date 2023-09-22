@@ -2,7 +2,7 @@ package com.me.projects.character.movement
 
 import kotlin.random.Random
 
-fun selectIndexBasedOnProbability(probabilities: List<Double>): Direction {
+fun selectIndexBasedOnProbability(probabilities: DoubleArray): Direction {
     if (probabilities.isEmpty() || probabilities.size != 9) {
         return Direction.CENTER
     }
