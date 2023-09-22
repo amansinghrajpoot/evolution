@@ -10,6 +10,11 @@ public class ApplicationConstants {
     public final static int CELL_END_WIDTH_BOUNDARY = 995;
     public final static int BOTTOM_PANEL_HEIGHT = 30;
     public final static int GENES_SIZE = 9;
+    public final static int MAXIMUM_CELL_STEPS = 700;
+    public final static int MAX_GENERATIONS = 10;
+    public final static int MAX_POPULATION = 500;
+    public final static Long THREAD_SLEEP_MS = 20L;
+    public final static int REFRESH_RATE = 10;
     public final static String BACKGROUND_COLOR = "#333333";
     public final static String BOTTOM_PANEL_BACKGROUND_COLOR = "#517ca2";
     public final static String FONT_COLOR = "#D4F1F4";
