@@ -1,19 +1,20 @@
 package com.me.projects
 
+import com.me.projects.character.movement.Direction
+import com.me.projects.character.movement.moveCellToDirection
 import com.me.projects.game.gui.GUI
 
-fun main(args: Array<String>) {
+fun main() {
     val gui = GUI()
-    val pointsList = ArrayList<Pair<Int, Int>>()
-    pointsList.add(Pair<Int, Int>(300, 300))
-    pointsList.add(Pair<Int, Int>(500, 500))
-    pointsList.add(Pair<Int, Int>(600, 400))
+    val pointsList = ArrayList<IntArray>()
+
+    pointsList.add(intArrayOf(600, 400))
     gui.draw(pointsList)
 
     Thread.sleep(2000)
 
-    pointsList.add(Pair<Int, Int>(100, 300))
-    pointsList.add(Pair<Int, Int>(100, 500))
-    pointsList.add(Pair<Int, Int>(300, 400))
+    moveCellToDirection(Direction.UP, pointsList[0])
     gui.draw(pointsList)
+
+    Thread.sleep(2000)
 }
