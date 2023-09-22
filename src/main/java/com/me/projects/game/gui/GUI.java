@@ -1,5 +1,4 @@
 package com.me.projects.game.gui;
-import kotlin.Pair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,8 +47,12 @@ public class GUI {
         }
     }
 
-    final static int POINT_SIZE = 5;
-    final static int FRAME_HEIGHT = 700;
-    final static int FRAME_WIDTH = 1000;
+    public final static int POINT_SIZE = 5;
+    public final static int FRAME_HEIGHT = 700;
+    public final static int CELL_START_HEIGHT_BOUNDARY = 5;
+    public final static int CELL_END_HEIGHT_BOUNDARY = 695;
+    public final static int FRAME_WIDTH = 1000;
+    public final static int CELL_START_WIDTH_BOUNDARY = 5;
+    public final static int CELL_END_WIDTH_BOUNDARY = 995;
     final private static String BACKGROUND_COLOR = "#333333";
 }
