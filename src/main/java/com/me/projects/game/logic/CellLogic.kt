@@ -18,12 +18,12 @@ fun killCellsOnLeftSide(cells: ArrayList<Cell>) {
     cells.removeAll(cellsToRemove.toSet())
 }
 
-fun paintCellsOnGUI(cells: ArrayList<Cell>) {
+fun paintCellsOnGUI(cells: ArrayList<Cell>, text: String) {
     val pointsList = ArrayList<IntArray>()
     for (cell in cells) {
         pointsList.add(cell.coordinates)
     }
-    GUI_FRAME.draw(pointsList)
+    GUI_FRAME.draw(pointsList, text)
 }
 
 fun makeCellsMove(cells: ArrayList<Cell>) {

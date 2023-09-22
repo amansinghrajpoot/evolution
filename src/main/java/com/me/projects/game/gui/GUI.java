@@ -4,30 +4,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.me.projects.game.util.ApplicationConstants.POINT_SIZE;
-import static com.me.projects.game.util.ApplicationConstants.FRAME_WIDTH;
-import static com.me.projects.game.util.ApplicationConstants.FRAME_HEIGHT;
-import static com.me.projects.game.util.ApplicationConstants.BACKGROUND_COLOR;
+import static com.me.projects.game.util.ApplicationConstants.*;
 
 public class GUI {
 
-    private final PointPanel pointPanel;
+    private final JPanel mainPanel;
 
     public GUI() {
-        JFrame frame = new JFrame("Evolution (The zero-player game)");
+        JFrame frame = new JFrame(JFRAME_TITLE);
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        pointPanel = new PointPanel();
+        mainPanel = new JPanel(new BorderLayout());
+
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setPreferredSize(new Dimension(FRAME_WIDTH, BOTTOM_PANEL_HEIGHT));
+        bottomPanel.setBackground(Color.decode(BOTTOM_PANEL_BACKGROUND_COLOR));
+
+        JPanel pointPanel = new PointPanel();
         pointPanel.setBackground(Color.decode(BACKGROUND_COLOR));
 
-        frame.add(pointPanel);
+        JLabel label = new JLabel();
+        label.setForeground(Color.decode(FONT_COLOR));
+        label.setHorizontalAlignment(JLabel.CENTER);
+
+        bottomPanel.add(label);
+
+        mainPanel.add(pointPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        frame.add(mainPanel);
         frame.setVisible(true);
     }
 
-    public void draw(ArrayList<int[]> pointsList) {
-        pointPanel.setPointsList(pointsList);
+    public void draw(ArrayList<int[]> pointsList, String text) {
+        ((JLabel)((JPanel) mainPanel.getComponent(1)).getComponent(0)).setText(text);
+        ((PointPanel) mainPanel.getComponent(0)).setPointsList(pointsList);
     }
 
     static class PointPanel extends JPanel {
