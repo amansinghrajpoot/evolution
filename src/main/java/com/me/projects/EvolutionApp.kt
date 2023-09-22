@@ -8,6 +8,8 @@ import com.me.projects.game.logic.paintCellsOnGUI
 fun main() {
     val cell = Cell(intArrayOf(300, 200), doubleArrayOf(0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0))
 
+    val da = doubleArrayOf(0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0)
+
     val cells = arrayListOf(cell)
 
     paintCellsOnGUI(cells)

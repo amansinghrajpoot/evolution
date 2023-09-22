@@ -6,6 +6,7 @@ import com.me.projects.character.movement.selectIndexBasedOnProbability
 import com.me.projects.game.gui.GUI
 
 val GUI_FRAME = GUI()
+
 fun killCellsOnLeftSide(cells: ArrayList<Cell>) {
     val cellsToRemove: MutableSet<Cell> = mutableSetOf()
     for (cell in cells) {
