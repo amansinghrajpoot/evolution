@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static com.me.projects.game.util.ApplicationConstants.POINT_SIZE;
+import static com.me.projects.game.util.ApplicationConstants.FRAME_WIDTH;
+import static com.me.projects.game.util.ApplicationConstants.FRAME_HEIGHT;
+import static com.me.projects.game.util.ApplicationConstants.BACKGROUND_COLOR;
+
 public class GUI {
 
     private final PointPanel pointPanel;
@@ -46,13 +51,4 @@ public class GUI {
             }
         }
     }
-
-    public final static int POINT_SIZE = 5;
-    public final static int FRAME_HEIGHT = 700;
-    public final static int CELL_START_HEIGHT_BOUNDARY = 5;
-    public final static int CELL_END_HEIGHT_BOUNDARY = 695;
-    public final static int FRAME_WIDTH = 1000;
-    public final static int CELL_START_WIDTH_BOUNDARY = 5;
-    public final static int CELL_END_WIDTH_BOUNDARY = 995;
-    final private static String BACKGROUND_COLOR = "#333333";
 }

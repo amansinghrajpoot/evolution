@@ -4,12 +4,13 @@ import com.me.projects.character.Cell
 import com.me.projects.character.movement.moveCellToDirection
 import com.me.projects.character.movement.selectIndexBasedOnProbability
 import com.me.projects.game.gui.GUI
+import com.me.projects.game.util.ApplicationConstants.FRAME_WIDTH
 
 val GUI_FRAME = GUI()
 fun killCellsOnLeftSide(cells: ArrayList<Cell>) {
     val cellsToRemove: MutableSet<Cell> = mutableSetOf()
     for (cell in cells) {
-        if (cell.coordinates[0] <= GUI.FRAME_WIDTH / 2) {
+        if (cell.coordinates[0] <= FRAME_WIDTH / 2) {
             cellsToRemove.add(cell)
         }
     }
