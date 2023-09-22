@@ -1,8 +1,8 @@
 package com.me.projects.character
 
 data class Cell(
-    val coordinates: IntArray,
-    val genes: DoubleArray
+    var coordinates: IntArray,
+    var genes: DoubleArray
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
