@@ -1,6 +1,6 @@
 package com.me.projects.character.movement
 
-enum class Directions(i: Int) {
+enum class Direction(i: Int) {
     TOP_LEFT(0),
     UP(1),
     TOP_RIGHT(2),

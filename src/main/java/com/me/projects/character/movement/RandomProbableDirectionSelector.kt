@@ -2,9 +2,9 @@ package com.me.projects.character.movement
 
 import kotlin.random.Random
 
-fun selectIndexBasedOnProbability(probabilities: List<Double>): Directions {
+fun selectIndexBasedOnProbability(probabilities: List<Double>): Direction {
     if (probabilities.isEmpty() || probabilities.size != 9) {
-        return Directions.CENTER
+        return Direction.CENTER
     }
 
     val normalizedProbabilities = probabilities.map { it / probabilities.sum() }
@@ -14,9 +14,9 @@ fun selectIndexBasedOnProbability(probabilities: List<Double>): Directions {
     for (i in normalizedProbabilities.indices) {
         cumulativeProbability += normalizedProbabilities[i]
         if (randomValue <= cumulativeProbability) {
-            return Directions.values().find { it.ordinal == i }!!
+            return Direction.values().find { it.ordinal == i }!!
         }
     }
 
-    return Directions.CENTER
+    return Direction.CENTER
 }

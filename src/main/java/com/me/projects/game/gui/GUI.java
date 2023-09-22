@@ -7,11 +7,10 @@ import java.util.ArrayList;
 
 public class GUI {
 
-    private JFrame frame;
-    private PointPanel pointPanel;
+    private final PointPanel pointPanel;
 
     public GUI() {
-        frame = new JFrame("Evolution (The zero-player game)");
+        JFrame frame = new JFrame("Evolution (The zero-player game)");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -23,14 +22,14 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    public void draw(ArrayList<Pair<Integer, Integer>> pointsList) {
+    public void draw(ArrayList<int[]> pointsList) {
         pointPanel.setPointsList(pointsList);
     }
 
-    class PointPanel extends JPanel {
-        private ArrayList<Pair<Integer, Integer>> pointsList;
+    static class PointPanel extends JPanel {
+        private ArrayList<int[]> pointsList;
 
-        public void setPointsList(ArrayList<Pair<Integer, Integer>> pointsList) {
+        public void setPointsList(ArrayList<int[]> pointsList) {
             this.pointsList = pointsList;
             this.repaint();
         }
@@ -40,17 +39,17 @@ public class GUI {
             super.paintComponent(g);
             g.setColor(Color.GREEN);
             if (pointsList != null) {
-                for (Pair<Integer, Integer> point : pointsList) {
-                    int x = point.getFirst();
-                    int y = point.getSecond();
+                for (int[] point : pointsList) {
+                    int x = point[0];
+                    int y = point[1];
                     g.fillOval(x - POINT_SIZE / 2, y - POINT_SIZE / 2, POINT_SIZE, POINT_SIZE);
                 }
             }
         }
     }
 
-    final private static int POINT_SIZE = 5;
-    final private static int FRAME_HEIGHT = 700;
-    final private static int FRAME_WIDTH = 1000;
+    final static int POINT_SIZE = 5;
+    final static int FRAME_HEIGHT = 700;
+    final static int FRAME_WIDTH = 1000;
     final private static String BACKGROUND_COLOR = "#333333";
 }
