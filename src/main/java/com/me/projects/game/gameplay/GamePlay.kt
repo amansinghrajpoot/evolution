@@ -12,6 +12,7 @@ import com.me.projects.game.util.ApplicationConstants.CELL_START_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_WIDTH_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.MAXIMUM_CELL_STEPS
 import com.me.projects.game.util.ApplicationConstants.MAX_GENERATIONS
+import com.me.projects.game.util.ApplicationConstants.MAX_POPULATION
 import com.me.projects.game.util.ApplicationConstants.REFRESH_RATE
 import com.me.projects.game.util.ApplicationConstants.THREAD_SLEEP_MS
 import kotlin.random.Random
@@ -23,19 +24,7 @@ fun startGame() {
     var mutated = 0
     var reproduced = 0
 
-    val cells = arrayListOf(
-        Cell(intArrayOf(500, 350), doubleArrayOf(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)),
-        Cell(intArrayOf(200, 200), doubleArrayOf(0.4, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 1.0, 0.0)),
-        Cell(intArrayOf(540, 400), doubleArrayOf(0.1, 0.0, 0.5, 0.1, 0.1, 0.1, 0.0, 1.0, 0.0)),
-        Cell(intArrayOf(349, 500), doubleArrayOf(0.2, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 1.0, 0.5)),
-        Cell(intArrayOf(349, 500), doubleArrayOf(0.0, 0.0, 0.2, 0.2, 0.0, 0.0, 0.0, 1.0, 0.5)),
-        Cell(intArrayOf(349, 100), doubleArrayOf(0.1, 0.0, 0.2, 0.0, 0.2, 0.1, 0.3, 1.0, 0.0)),
-        Cell(intArrayOf(300, 105), doubleArrayOf(0.0, 0.0, 0.0, 0.1, 0.0, 0.3, 0.0, 1.0, 0.5)),
-        Cell(intArrayOf(500, 431), doubleArrayOf(0.0, 0.1, 0.1, 0.4, 0.1, 0.0, 0.0, 1.0, 0.1)),
-        Cell(intArrayOf(234, 234), doubleArrayOf(0.0, 0.0, 0.2, 0.2, 0.0, 0.1, 0.2, 1.0, 0.1)),
-        Cell(intArrayOf(432, 500), doubleArrayOf(0.0, 0.0, 0.2, 0.3, 0.3, 0.0, 0.0, 1.0, 0.0)),
-        Cell(intArrayOf(123, 433), doubleArrayOf(0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.2, 1.0, 0.5)),
-    )
+    val cells = generateRandomCells()
 
     for (i in 1..MAX_GENERATIONS) {
         for (j in 1..MAXIMUM_CELL_STEPS) {
@@ -64,4 +53,27 @@ fun repositionCells(cells: ArrayList<Cell>) {
         val newY = Random.nextInt(CELL_START_HEIGHT_BOUNDARY, CELL_END_HEIGHT_BOUNDARY)
         cell.coordinates = intArrayOf(newX, newY)
     }
+}
+
+fun generateRandomCells(): ArrayList<Cell> {
+    val cells = arrayListOf<Cell>()
+    for (i in 0 until MAX_POPULATION) {
+        val x = Random.nextInt(CELL_START_WIDTH_BOUNDARY, CELL_END_WIDTH_BOUNDARY)
+        val y = Random.nextInt(CELL_START_HEIGHT_BOUNDARY, CELL_END_HEIGHT_BOUNDARY)
+        val genes = generateRandomGenes()
+        cells.add(Cell(intArrayOf(x, y), genes))
+    }
+    return cells
+}
+
+fun generateRandomGenes(): DoubleArray {
+    val genes = DoubleArray(9) { Random.nextDouble(0.0, 1.0) }
+    val sum = genes.sum()
+    if (sum > 1.0) {
+        val scaleFactor = 1.0 / sum
+        for (i in genes.indices) {
+            genes[i] *= scaleFactor
+        }
+    }
+    return genes
 }
