@@ -19,7 +19,7 @@ import kotlin.random.Random
 
 fun startGame() {
     var generation = 1
-    var kills = 0
+    var killed = 0
     var currentPopulation = 0
     var mutated = 0
     var reproduced = 0
@@ -33,18 +33,17 @@ fun startGame() {
             Thread.sleep(THREAD_SLEEP_MS)
 
             if (j % REFRESH_RATE == 0) {
-                paintCellsOnGUI(cells, "Generation: $generation Kills: $kills Mutated: $mutated Reproduced: $reproduced")
+                paintCellsOnGUI(cells, "Generation: $generation Killed: $killed Mutated: $mutated Reproduced: $reproduced")
             }
         }
         killCellsOnLeftSide(cells)
-        kills = currentPopulation - cells.size
+        killed = currentPopulation - cells.size
         generation += 1
 
         mutated = mutateGenes(cells)
         reproduced = reproduce(cells)
         repositionCells(cells)
     }
-    paintCellsOnGUI(cells, "Generation: $generation Kills: $kills Mutated: $mutated Reproduced: $reproduced")
 }
 
 fun repositionCells(cells: ArrayList<Cell>) {
