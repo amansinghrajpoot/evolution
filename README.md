@@ -1,5 +1,11 @@
 # Evolution (The zero-player game)
 
+## How to run 
+
+```bash
+mvn exec:java -Dexec.mainClass="com.me.projects.EvolutionAppKt"
+```
+
 ## Overview
 
 This is a zero-player game based on a genetic algorithm inspired by a YouTuber. In this simulation, you'll encounter simple single-cell organisms represented as green dots (".") on the screen. These cells have a unique property called "genes," which influences their movement behavior. While their movement is inherently random, the genes predispose them to prefer certain directions over others.
