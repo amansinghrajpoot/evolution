@@ -38,27 +38,28 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    public void draw(ArrayList<int[]> pointsList, String text) {
+    public void draw(ArrayList<PrintableCell> printableCellsList, String text) {
         ((JLabel)((JPanel) mainPanel.getComponent(1)).getComponent(0)).setText(text);
-        ((PointPanel) mainPanel.getComponent(0)).setPointsList(pointsList);
+        ((PointPanel) mainPanel.getComponent(0)).setPrintableCellsList(printableCellsList);
     }
 
     static class PointPanel extends JPanel {
-        private ArrayList<int[]> pointsList;
+        private ArrayList<PrintableCell> printableCellsList;
 
-        public void setPointsList(ArrayList<int[]> pointsList) {
-            this.pointsList = pointsList;
+        public void setPrintableCellsList(ArrayList<PrintableCell> printableCellsList) {
+            this.printableCellsList = printableCellsList;
             this.repaint();
         }
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.setColor(Color.GREEN);
-            if (pointsList != null) {
-                for (int[] point : pointsList) {
-                    int x = point[0];
-                    int y = point[1];
+            if (printableCellsList != null) {
+                for (PrintableCell printableCell : printableCellsList) {
+                    Color color = printableCell.getGender() == 1 ? Color.YELLOW : Color.GREEN;
+                    g.setColor(color);
+                    int x = printableCell.getCoordinates()[0];
+                    int y = printableCell.getCoordinates()[1];
                     g.fillOval(x - POINT_SIZE / 2, y - POINT_SIZE / 2, POINT_SIZE, POINT_SIZE);
                 }
             }

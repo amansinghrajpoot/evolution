@@ -1,6 +1,8 @@
 package com.me.projects.game.util;
 
 public class ApplicationConstants {
+    public final static int GENDER_INDEX = 9;
+    public final static int LOCO_GENES_SIZE = 9;
     public final static int POINT_SIZE = 5;
     public final static int FRAME_HEIGHT = 700;
     public final static int CELL_START_HEIGHT_BOUNDARY = 5;
