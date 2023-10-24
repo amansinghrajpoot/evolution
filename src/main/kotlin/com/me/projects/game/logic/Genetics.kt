@@ -6,6 +6,8 @@ import com.me.projects.game.util.ApplicationConstants
 import com.me.projects.game.util.ApplicationConstants.GENDER_INDEX
 import com.me.projects.game.util.ApplicationConstants.GENES_SIZE
 import com.me.projects.game.util.ApplicationConstants.LOCO_GENES_SIZE
+import com.me.projects.game.util.ApplicationConstants.PROXIMITY_THRESHOLD
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 fun mutateGenes(cells: ArrayList<Cell>): Int {
@@ -36,9 +38,11 @@ fun reproduce(cells: ArrayList<Cell>): Int {
             val firstParentIndex = Random.nextInt(0, cellSize)
             val secondParentIndex = Random.nextInt(0, cellSize)
 
-            if (cells[firstParentIndex].genes[GENDER_INDEX] != cells[secondParentIndex].genes[GENDER_INDEX]) {
-                val firstParentGenes = cells[firstParentIndex].genes
-                val secondParentGenes = cells[secondParentIndex].genes
+            val closeCells = selectCloseCells(cells)
+
+            if (closeCells != null && haveOppositeGender(cells[firstParentIndex], cells[secondParentIndex])) {
+                val firstParentGenes = closeCells.first.genes
+                val secondParentGenes = closeCells.second.genes
 
                 val midpoint = (firstParentGenes.size - 1) / 2
 
@@ -51,19 +55,27 @@ fun reproduce(cells: ArrayList<Cell>): Int {
 
                 val newCell1 = Cell(
                     genes = (normalizedGenes + generateRandomGender()).toDoubleArray(),
-                    coordinates = IntArray(
+                    coordinates = intArrayOf(
                         Random.nextInt(
-                            ApplicationConstants.CELL_START_WIDTH_BOUNDARY,
+                            ApplicationConstants.CELL_END_WIDTH_BOUNDARY / 2,
                             ApplicationConstants.CELL_END_WIDTH_BOUNDARY
+                        ),
+                        Random.nextInt(
+                            ApplicationConstants.CELL_START_HEIGHT_BOUNDARY,
+                            ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
                         )
                     )
                 )
                 val newCell2 = Cell(
                     genes = (normalizedGenes + generateRandomGender()).toDoubleArray(),
-                    coordinates = IntArray(
+                    coordinates = intArrayOf(
                         Random.nextInt(
-                            ApplicationConstants.CELL_START_WIDTH_BOUNDARY,
+                            ApplicationConstants.CELL_END_WIDTH_BOUNDARY / 2,
                             ApplicationConstants.CELL_END_WIDTH_BOUNDARY
+                        ),
+                        Random.nextInt(
+                            ApplicationConstants.CELL_START_HEIGHT_BOUNDARY,
+                            ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
                         )
                     )
                 )
@@ -74,4 +86,39 @@ fun reproduce(cells: ArrayList<Cell>): Int {
         } catch (_: Exception) { }
     }
     return count
+}
+
+private fun haveOppositeGender(cell1: Cell, cell2: Cell): Boolean {
+    return cell1.genes[GENDER_INDEX] != cell2.genes[GENDER_INDEX]
+}
+
+private fun areCellsClose(cell1: Cell, cell2: Cell): Boolean {
+    val distance = calculateEuclideanDistance(cell1, cell2)
+    return distance <= PROXIMITY_THRESHOLD
+}
+
+private fun calculateEuclideanDistance(cell1: Cell, cell2: Cell): Int {
+    val x1 = cell1.coordinates[0]
+    val y1 = cell1.coordinates[1]
+    val x2 = cell2.coordinates[0]
+    val y2 = cell2.coordinates[1]
+
+    val deltaX: Int = x2 - x1
+    val deltaY: Int = y2 - y1
+
+    return sqrt((deltaX * deltaX + deltaY * deltaY).toDouble()).toInt()
+}
+
+private fun selectCloseCells(cells: List<Cell>): Pair<Cell, Cell>? {
+    for (i in 0 until cells.size - 1) {
+        val cell1 = cells[i]
+        for (j in i + 1 until cells.size) {
+            val cell2 = cells[j]
+            val distance = calculateEuclideanDistance(cell1, cell2)
+            if (distance <= PROXIMITY_THRESHOLD) {
+                return Pair(cell1, cell2)
+            }
+        }
+    }
+    return null
 }

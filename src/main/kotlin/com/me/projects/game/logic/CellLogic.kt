@@ -11,7 +11,8 @@ import com.me.projects.game.util.ApplicationConstants.LOCO_GENES_SIZE
 
 val GUI_FRAME = GUI()
 
-fun killCellsOnLeftSide(cells: ArrayList<Cell>) {
+fun killCellsOnLeftSide(cells: ArrayList<Cell>): Int {
+    val initialSize = cells.size
     val cellsToRemove: MutableSet<Cell> = mutableSetOf()
     for (cell in cells) {
         if (cell.coordinates[0] <= FRAME_WIDTH / 2) {
@@ -19,6 +20,7 @@ fun killCellsOnLeftSide(cells: ArrayList<Cell>) {
         }
     }
     cells.removeAll(cellsToRemove.toSet())
+    return initialSize - cells.size
 }
 
 fun paintCellsOnGUI(cells: ArrayList<Cell>, text: String) {
