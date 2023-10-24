@@ -10,11 +10,14 @@ import com.me.projects.game.util.ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_END_WIDTH_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_WIDTH_BOUNDARY
+import com.me.projects.game.util.ApplicationConstants.KILLING_RATE
 import com.me.projects.game.util.ApplicationConstants.LOCO_GENES_SIZE
 import com.me.projects.game.util.ApplicationConstants.MAXIMUM_CELL_STEPS
 import com.me.projects.game.util.ApplicationConstants.MAX_GENERATIONS
 import com.me.projects.game.util.ApplicationConstants.MAX_POPULATION
+import com.me.projects.game.util.ApplicationConstants.MUTATION_RATE
 import com.me.projects.game.util.ApplicationConstants.REFRESH_RATE
+import com.me.projects.game.util.ApplicationConstants.REPRODUCTION_RATE
 import com.me.projects.game.util.ApplicationConstants.THREAD_SLEEP_MS
 import kotlin.random.Random
 
@@ -36,14 +39,21 @@ fun startGame() {
             if (j % REFRESH_RATE == 0) {
                 paintCellsOnGUI(cells, "Population: $currentPopulation Generation: $generation Killed: $killed Mutated: $mutated Reproduced: $reproduced")
             }
+            if (j % REPRODUCTION_RATE == 0) reproduced += reproduce(cells)
+
+            if (j % KILLING_RATE == 0) {
+                killed += killCellsOnLeftSide(cells)
+            }
+            if (j % MUTATION_RATE == 0) {
+                mutated += mutateGenes(cells)
+            }
         }
-        killCellsOnLeftSide(cells)
-        killed = currentPopulation - cells.size
+        killed = 0
+        mutated = 0
+        reproduced = 0
         generation += 1
 
-        mutated = mutateGenes(cells)
-        reproduced = reproduce(cells)
-        repositionCells(cells)
+        // repositionCells(cells)
     }
 }
 
@@ -82,6 +92,6 @@ fun generateRandomGenes(): DoubleArray {
     return (genes + gender).toDoubleArray()
 }
 
-fun generateRandomGender(): Double{
+fun generateRandomGender(): Double {
     return if (Random.nextBoolean()) 1.0 else 0.0
 }

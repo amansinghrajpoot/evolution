@@ -1,9 +1,15 @@
 package com.me.projects.game.util;
 
 public class ApplicationConstants {
+    public final static int MAX_GENERATIONS = 50;
+    public final static int MAX_POPULATION = 1000;
     public final static int GENDER_INDEX = 9;
     public final static int LOCO_GENES_SIZE = 9;
+    public final static int REPRODUCTION_RATE = 30;
+    public final static int KILLING_RATE = 30;
+    public final static int MUTATION_RATE = 30;
     public final static int POINT_SIZE = 5;
+    public final static int PROXIMITY_THRESHOLD = 20;
     public final static int FRAME_HEIGHT = 700;
     public final static int CELL_START_HEIGHT_BOUNDARY = 5;
     public final static int CELL_END_HEIGHT_BOUNDARY = 635;
@@ -13,8 +19,6 @@ public class ApplicationConstants {
     public final static int BOTTOM_PANEL_HEIGHT = 30;
     public final static int GENES_SIZE = 9;
     public final static int MAXIMUM_CELL_STEPS = 700;
-    public final static int MAX_GENERATIONS = 50;
-    public final static int MAX_POPULATION = 1000;
     public final static Long THREAD_SLEEP_MS = 20L;
     public final static int REFRESH_RATE = 10;
     public final static String BACKGROUND_COLOR = "#333333";
