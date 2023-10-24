@@ -40,7 +40,7 @@ fun reproduce(cells: ArrayList<Cell>): Int {
 
             val closeCells = selectCloseCells(cells)
 
-            if (closeCells!= null && haveOppositeGender(cells[firstParentIndex], cells[secondParentIndex])) {
+            if (closeCells != null && haveOppositeGender(cells[firstParentIndex], cells[secondParentIndex])) {
                 val firstParentGenes = closeCells.first.genes
                 val secondParentGenes = closeCells.second.genes
 
