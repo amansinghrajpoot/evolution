@@ -10,6 +10,7 @@ import com.me.projects.game.util.ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_END_WIDTH_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_WIDTH_BOUNDARY
+import com.me.projects.game.util.ApplicationConstants.LOCO_GENES_SIZE
 import com.me.projects.game.util.ApplicationConstants.MAXIMUM_CELL_STEPS
 import com.me.projects.game.util.ApplicationConstants.MAX_GENERATIONS
 import com.me.projects.game.util.ApplicationConstants.MAX_POPULATION
@@ -33,7 +34,7 @@ fun startGame() {
             Thread.sleep(THREAD_SLEEP_MS)
 
             if (j % REFRESH_RATE == 0) {
-                paintCellsOnGUI(cells, "Generation: $generation Killed: $killed Mutated: $mutated Reproduced: $reproduced")
+                paintCellsOnGUI(cells, "Population: $currentPopulation Generation: $generation Killed: $killed Mutated: $mutated Reproduced: $reproduced")
             }
         }
         killCellsOnLeftSide(cells)
@@ -66,7 +67,10 @@ fun generateRandomCells(): ArrayList<Cell> {
 }
 
 fun generateRandomGenes(): DoubleArray {
-    val genes = DoubleArray(9) { Random.nextDouble(0.0, 1.0) }
+    val genes = mutableListOf<Double>()
+    repeat(LOCO_GENES_SIZE) {
+        genes.add(Random.nextDouble(0.0, 1.0))
+    }
     val sum = genes.sum()
     if (sum > 1.0) {
         val scaleFactor = 1.0 / sum
@@ -74,5 +78,10 @@ fun generateRandomGenes(): DoubleArray {
             genes[i] *= scaleFactor
         }
     }
-    return genes
+    val gender = generateRandomGender()
+    return (genes + gender).toDoubleArray()
+}
+
+fun generateRandomGender(): Double{
+    return if (Random.nextBoolean()) 1.0 else 0.0
 }
