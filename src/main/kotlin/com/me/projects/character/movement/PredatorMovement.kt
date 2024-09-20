@@ -5,7 +5,7 @@ import com.me.projects.game.util.ApplicationConstants.CELL_END_WIDTH_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_HEIGHT_BOUNDARY
 import com.me.projects.game.util.ApplicationConstants.CELL_START_WIDTH_BOUNDARY
 
-fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
+fun movePredatorToDirection(direction: Direction, coordinate: IntArray) {
     val newX = coordinate[0]
     val newY = coordinate[1]
 
@@ -14,28 +14,28 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
 
         Direction.UP -> {
             val updatedY = newY - 5
-            if (isValidCellCoordinate(newX, updatedY)) {
+            if (isValidPredatorCoordinate(newX, updatedY)) {
                 coordinate[1] = updatedY
             }
         }
 
         Direction.DOWN -> {
             val updatedY = newY + 5
-            if (isValidCellCoordinate(newX, updatedY)) {
+            if (isValidPredatorCoordinate(newX, updatedY)) {
                 coordinate[1] = updatedY
             }
         }
 
         Direction.LEFT -> {
             val updatedX = newX - 5
-            if (isValidCellCoordinate(updatedX, newY)) {
+            if (isValidPredatorCoordinate(updatedX, newY)) {
                 coordinate[0] = updatedX
             }
         }
 
         Direction.RIGHT -> {
             val updatedX = newX + 5
-            if (isValidCellCoordinate(updatedX, newY)) {
+            if (isValidPredatorCoordinate(updatedX, newY)) {
                 coordinate[0] = updatedX
             }
         }
@@ -43,7 +43,7 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
         Direction.TOP_LEFT -> {
             val updatedX = newX - 5
             val updatedY = newY - 5
-            if (isValidCellCoordinate(updatedX, updatedY)) {
+            if (isValidPredatorCoordinate(updatedX, updatedY)) {
                 coordinate[0] = updatedX
                 coordinate[1] = updatedY
             }
@@ -52,7 +52,7 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
         Direction.TOP_RIGHT -> {
             val updatedX = newX + 5
             val updatedY = newY - 5
-            if (isValidCellCoordinate(updatedX, updatedY)) {
+            if (isValidPredatorCoordinate(updatedX, updatedY)) {
                 coordinate[0] = updatedX
                 coordinate[1] = updatedY
             }
@@ -61,7 +61,7 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
         Direction.BOTTOM_LEFT -> {
             val updatedX = newX - 5
             val updatedY = newY + 5
-            if (isValidCellCoordinate(updatedX, updatedY)) {
+            if (isValidPredatorCoordinate(updatedX, updatedY)) {
                 coordinate[0] = updatedX
                 coordinate[1] = updatedY
             }
@@ -70,7 +70,7 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
         Direction.BOTTOM_RIGHT -> {
             val updatedX = newX + 5
             val updatedY = newY + 5
-            if (isValidCellCoordinate(updatedX, updatedY)) {
+            if (isValidPredatorCoordinate(updatedX, updatedY)) {
                 coordinate[0] = updatedX
                 coordinate[1] = updatedY
             }
@@ -78,7 +78,7 @@ fun moveCellToDirection(direction: Direction, coordinate: IntArray) {
     }
 }
 
-fun isValidCellCoordinate(x: Int, y: Int): Boolean {
+fun isValidPredatorCoordinate(x: Int, y: Int): Boolean {
     return x in CELL_START_WIDTH_BOUNDARY..CELL_END_WIDTH_BOUNDARY &&
-        y in CELL_START_HEIGHT_BOUNDARY..CELL_END_HEIGHT_BOUNDARY
+            y in CELL_START_HEIGHT_BOUNDARY..CELL_END_HEIGHT_BOUNDARY
 }

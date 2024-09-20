@@ -3,6 +3,7 @@ package com.me.projects.game.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.me.projects.game.util.ApplicationConstants.*;
 
@@ -43,11 +44,21 @@ public class GUI {
         ((PointPanel) mainPanel.getComponent(0)).setPrintableCellsList(printableCellsList);
     }
 
+    public void drawPredator(ArrayList<PrintablePredator> printablePredatorsList) {
+        ((PointPanel) mainPanel.getComponent(0)).setPrintablePredatorsList(printablePredatorsList);
+    }
+
     static class PointPanel extends JPanel {
         private ArrayList<PrintableCell> printableCellsList;
+        private ArrayList<PrintablePredator> printablePredatorsList;
 
         public void setPrintableCellsList(ArrayList<PrintableCell> printableCellsList) {
             this.printableCellsList = printableCellsList;
+            this.repaint();
+        }
+
+        public void setPrintablePredatorsList(ArrayList<PrintablePredator> printablePredatorsList) {
+            this.printablePredatorsList = printablePredatorsList;
             this.repaint();
         }
 
@@ -61,6 +72,26 @@ public class GUI {
                     int x = printableCell.getCoordinates()[0];
                     int y = printableCell.getCoordinates()[1];
                     g.fillOval(x - POINT_SIZE / 2, y - POINT_SIZE / 2, POINT_SIZE, POINT_SIZE);
+                }
+            }
+            if (printablePredatorsList != null) {
+                Random random = new Random();  // Create a Random object for generating random angles
+
+                for (PrintablePredator printablePredator : printablePredatorsList) {
+                    Color color = printablePredator.getGender() == 1 ? Color.CYAN : Color.RED;
+                    g.setColor(color);
+
+                    int x = printablePredator.getCoordinates()[0];
+                    int y = printablePredator.getCoordinates()[1];
+
+                    Graphics2D g2d = (Graphics2D) g;
+
+                    // Randomize the startAngle to make Pac-Man face different directions
+                    int startAngle = random.nextInt(360);  // Random angle between 0 and 360 degrees
+                    int arcAngle = 300;   // Keep the "mouth" open to 300 degrees
+
+                    // Draw the Pac-Man shape with the randomized startAngle
+                    g2d.fillArc(x - PREDATOR_POINT_SIZE / 2, y - PREDATOR_POINT_SIZE / 2, PREDATOR_POINT_SIZE, PREDATOR_POINT_SIZE, startAngle, arcAngle);
                 }
             }
         }
