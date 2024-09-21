@@ -64,7 +64,8 @@ fun reproduce(cells: ArrayList<Cell>): Int {
                             ApplicationConstants.CELL_START_HEIGHT_BOUNDARY,
                             ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
                         )
-                    )
+                    ),
+                    socialBehaviour = (closeCells.first.socialBehaviour + closeCells.second.socialBehaviour) / 2
                 )
                 val newCell2 = Cell(
                     genes = (normalizedGenes + generateRandomGender()).toDoubleArray(),
@@ -77,7 +78,8 @@ fun reproduce(cells: ArrayList<Cell>): Int {
                             ApplicationConstants.CELL_START_HEIGHT_BOUNDARY,
                             ApplicationConstants.CELL_END_HEIGHT_BOUNDARY
                         )
-                    )
+                    ),
+                    socialBehaviour = (closeCells.first.socialBehaviour + closeCells.second.socialBehaviour) / 2
                 )
                 cells.add(newCell1)
                 cells.add(newCell2)

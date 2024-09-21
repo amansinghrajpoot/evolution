@@ -6,7 +6,7 @@ public class ApplicationConstants {
     public final static int MAX_PREDATOR_POPULATION = 10;
     public final static int GENDER_INDEX = 9;
     public final static int LOCO_GENES_SIZE = 9;
-    public final static int REPRODUCTION_RATE = 1000;
+    public final static int REPRODUCTION_RATE = 2;
     public final static int KILLING_RATE = 30;
     public final static int KILLING_RADIUS = 10;
     public final static int MUTATION_RATE = 30;

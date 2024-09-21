@@ -81,7 +81,8 @@ fun generateRandomCells(): ArrayList<Cell> {
         val x = Random.nextInt(CELL_START_WIDTH_BOUNDARY, CELL_END_WIDTH_BOUNDARY)
         val y = Random.nextInt(CELL_START_HEIGHT_BOUNDARY, CELL_END_HEIGHT_BOUNDARY)
         val genes = generateRandomGenes()
-        cells.add(Cell(intArrayOf(x, y), genes))
+        val socialBehavior = Random.nextInt(0, 100)
+        cells.add(Cell(intArrayOf(x, y), genes, socialBehavior))
     }
     return cells
 }
