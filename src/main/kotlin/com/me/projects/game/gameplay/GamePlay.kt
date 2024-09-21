@@ -88,14 +88,14 @@ fun generateRandomCells(): ArrayList<Cell> {
 }
 
 fun generateRandomPredators(): ArrayList<Predator> {
-    val Predators = arrayListOf<Predator>()
+    val predators = arrayListOf<Predator>()
     for (i in 0 until MAX_PREDATOR_POPULATION) {
         val x = Random.nextInt(CELL_START_WIDTH_BOUNDARY, CELL_END_WIDTH_BOUNDARY)
         val y = Random.nextInt(CELL_START_HEIGHT_BOUNDARY, CELL_END_HEIGHT_BOUNDARY)
         val genes = generateRandomGenes()
-        Predators.add(Predator(intArrayOf(x, y), genes))
+        predators.add(Predator(intArrayOf(x, y), genes))
     }
-    return Predators
+    return predators
 }
 
 fun generateRandomGenes(): DoubleArray {
